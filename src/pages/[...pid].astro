@@ -1,0 +1,44 @@
+---
+const { pid } = Astro.params;
+console.log(pid);
+const theme = import.meta.env.THEME;
+
+// export async function getStaticPaths() {
+//   const topicList = getTopics.get();
+//   return topicList.map((each) => {
+//     return {
+//       params: { topicid: each.topicID },
+//     };
+//   });
+// }
+//------
+// import Homepage from "../theme/layouts/Homepage.astro";
+//------
+
+const Homepage = (await import(`../theme/${theme}/Frame.astro`)).default;
+//------
+
+const tocresp = await fetch(`${Astro.url.origin}/api/toc.json`);
+let tocData = await tocresp.json();
+let pageData = null;
+const landingPageID = tocData[0].id;
+
+const metaresp = await fetch(`${Astro.url.origin}/api/sitemeta.json`);
+const metaData = await metaresp.json();
+
+if (pid === undefined) {
+  tocData = null;
+  pageData = null;
+  return Astro.redirect(`/${landingPageID}`);
+} else {
+  const presp = await fetch(`${Astro.url.origin}/api/page/${pid}.json`);
+  pageData = await presp.json();
+}
+---
+
+<Homepage
+  siteMeta={metaData}
+  tocData={tocData}
+  pageData={pageData}
+  currentPID={pid}
+/>

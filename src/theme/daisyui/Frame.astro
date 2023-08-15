@@ -1,0 +1,235 @@
+---
+import Skeleton from "./Skeleton.astro";
+import Block from "./Block.astro";
+const { siteMeta, tocData, pageData, currentPID } = Astro.props;
+// console.log("fffffffffffffffffffffrom Frame");
+// console.log(siteMeta);
+// console.log(tocData);
+function PrevAndNext(arr, id) {
+  let flattenedArray = [];
+
+  function flattenRecursive(obj) {
+    flattenedArray.push(obj);
+    if (obj.children && obj.children.length > 0) {
+      obj.children.forEach((child) => flattenRecursive(child));
+    }
+  }
+
+  arr.forEach((obj) => flattenRecursive(obj));
+
+  const index = flattenedArray.findIndex((obj) => obj.id === id);
+  if (index === -1) {
+    return null; // ID not found in the flattened array
+  }
+
+  const previousObject = index > 0 ? flattenedArray[index - 1] : null;
+  const nextObject =
+    index < flattenedArray.length - 1 ? flattenedArray[index + 1] : null;
+  return {
+    previousObject,
+    nextObject,
+  };
+}
+const { previousObject: prev, nextObject: next } = PrevAndNext(
+  tocData,
+  currentPID
+);
+
+// console.log(pageData);
+const currentTitle = `${pageData.pageTitle} - ${siteMeta.siteTitle} | Powered by Notionbook`;
+---
+
+<Skeleton pageTitle={currentTitle} siteIcon={siteMeta.siteIcon}>
+  <div class="drawer lg:drawer-open">
+    <input id="sidebar" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+      <div class="navbar bg-base-100 lg:hidden">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <label for="sidebar" tabindex="0" class="btn btn-ghost btn-circle">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h7"></path></svg
+              >
+            </label>
+          </div>
+        </div>
+        <div class="navbar-center">
+          <a class="btn btn-ghost normal-case text-xl">{siteMeta.siteTitle}</a>
+        </div>
+        <div class="navbar-end"></div>
+      </div>
+      <!-- ==================== -->
+      {
+        pageData ? (
+          <>
+            <div
+              class="newhero"
+              style={"background-image: url(" + pageData.pageCover + ")"}
+            />
+            <div class="mx-4 lg:mx-0">
+              <article class="prose prose-base mx-auto pt-4">
+                <h1>{pageData.pageTitle}</h1>
+                {pageData.pageContent.map((block) => (
+                  <Block block={block} />
+                ))}
+              </article>
+              <div class="divider mt-10" />
+              <div class="flex justify-between lg:mx-6">
+                {prev === null ? (
+                  <div />
+                ) : (
+                  <div>
+                    <a
+                      href={`/${prev.id}`}
+                      class="btn btn-sm md:btn-md gap-2 normal-case lg:gap-3"
+                    >
+                      <svg
+                        class="h-6 w-6 fill-current md:h-8 md:w-8"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+                      </svg>{" "}
+                      <div class="flex flex-col items-start">
+                        <span class="text-base-content/50 hidden text-xs font-normal md:block">
+                          Prev
+                        </span>{" "}
+                        <span>{prev.title}</span>
+                      </div>
+                    </a>
+                  </div>
+                )}
+                {next === null ? (
+                  <div />
+                ) : (
+                  <div>
+                    <a
+                      href={`/${next.id}`}
+                      class="btn btn-neutral btn-sm md:btn-md gap-2 normal-case lg:gap-3"
+                    >
+                      <div class="flex flex-col items-end">
+                        <span class="text-neutral-content/50 hidden text-xs font-normal md:block">
+                          Next
+                        </span>{" "}
+                        <span>{next.title}</span>
+                      </div>{" "}
+                      <svg
+                        class="h-6 w-6 fill-current md:h-8 md:w-8"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                      </svg>
+                    </a>
+                  </div>
+                )}
+              </div>
+              <div class="divider mt-10" />
+              <p class="text-center text-slate-500 text-sm">
+                Create At: {pageData.createdDate + " " + pageData.createdTime}
+              </p>
+            </div>
+          </>
+        ) : (
+          <p>loading</p>
+        )
+      }
+      <!-- ==================== -->
+    </div>
+    <div class="drawer-side">
+      <label for="sidebar" class="drawer-overlay"></label>
+
+      <div class="h-screen bg-base-200 flex flex-col w-80">
+        <div
+          class="h-1/6 flex justify-center items-center border-b border-slate-800"
+        >
+          <h1 class="text-lg font-semibold">{siteMeta.siteTitle}</h1>
+        </div>
+        <div class="flex-grow overflow-auto">
+          <div class="h-full">
+            <ul class="menu p-4 w-80 text-base-content h-full">
+              {
+                tocData ? (
+                  <ul class="menu w-full rounded-box">
+                    {() => {
+                      function iterator(objs) {
+                        return objs.map((each) => {
+                          if (each.children) {
+                            return (
+                              <li>
+                                <a
+                                  class={currentPID === each.id ? "active" : ""}
+                                  href={`./${each.id}`}
+                                >
+                                  {each.title}
+                                </a>
+                                <ul>{iterator(each.children)}</ul>
+                              </li>
+                            );
+                          } else {
+                            return (
+                              <li>
+                                <a
+                                  class={
+                                    Astro.url.pathname === "/" + each.id
+                                      ? "active"
+                                      : ""
+                                  }
+                                  href={`./${each.id}`}
+                                >
+                                  {each.title}
+                                </a>
+                              </li>
+                            );
+                          }
+                        });
+                      }
+
+                      return iterator(tocData);
+                    }}
+                  </ul>
+                ) : (
+                  <p>loading</p>
+                )
+              }
+            </ul>
+          </div>
+        </div>
+        <div
+          class="h-1/6 flex flex-col justify-center items-center border-t border-slate-800 m-4"
+        >
+          <p>Powered by</p>
+          <p>
+            <a
+              class="link link-primary font-semibold"
+              href="https://github.com/imyangmo/notionbook">NotionBook</a
+            > and <a class="link link-primary" href="https://daisyui.com/"
+              >DaisyUI</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Skeleton>
+<style>
+  .newhero {
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    height: 10vh;
+  }
+</style>

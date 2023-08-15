@@ -1,0 +1,9 @@
+---
+import RichText from "./RichText.astro";
+
+const { block } = Astro.props;
+---
+
+<blockquote class="text-gray-900 dark:text-white">
+    <RichText content={block.text} />
+</blockquote>

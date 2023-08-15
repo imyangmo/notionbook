@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.standul {
+    text-decoration: line-through underline;
+}
+
+.strikethrough {
+    @apply line-through
+}
+
+/* .underline {
+    @apply underline underline-offset-8
+} */
+
+/* .italic {
+    @apply italic
+} */
+
+.bold {
+    @apply font-bold
+}
+
+/* Color of the text. Possible values are: "default", "gray", "brown", "orange", "yellow", "green", "blue", "purple", "pink", "red", "gray_background", "brown_background", "orange_background", "yellow_background", "green_background", "blue_background", "purple_background", "pink_background", "red_background". */
+/* Color of the option. Possible values include: default, gray, brown, orange, yellow, green, blue, purple, pink, red. */
+.gray {
+    @apply text-gray-600
+}
+
+.brown {
+    @apply text-amber-600
+}
+
+.orange {
+    @apply text-orange-600
+}
+
+.yellow {
+    @apply text-yellow-600
+}
+
+.green {
+    @apply text-green-600
+}
+
+.blue {
+    @apply text-sky-600
+}
+
+.pink {
+    @apply text-pink-600
+}
+
+.purple {
+    @apply text-purple-600
+}
+
+.red {
+    @apply text-rose-600
+}
+
+.gray_background {
+    @apply bg-gray-600
+}
+
+.brown_background {
+    @apply bg-amber-600
+}
+
+.orange_background {
+    @apply bg-orange-600
+}
+
+.yellow_background {
+    @apply bg-yellow-600
+}
+
+.green_background {
+    @apply bg-green-600
+}
+
+.blue_background {
+    @apply bg-sky-600
+}
+
+.pink_background {
+    @apply bg-pink-600
+}
+
+.purple_background {
+    @apply bg-purple-600
+}
+
+.red_background {
+    @apply bg-rose-600
+}
