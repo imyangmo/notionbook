@@ -1,8 +1,7 @@
 ---
 import RichText from "./RichText.astro";
 
-
 const { block } = Astro.props;
-
 ---
-<h2><RichText content= { block.text }></RichText></h2>
+
+<h2 class="text-2xl leading-relaxed"><RichText content={block.text} /></h2>

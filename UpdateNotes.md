@@ -1,4 +1,11 @@
 # Update Notes
+
+**2023.8.15**
+- Notionbook initial version.
+
+---
+
+
 NotionBook is an variant of [Notionpaper](https://github.com/imyangmo/notionpaper_ssr), hence below changelogs are from Notionpaper.
 
 **2023.8.1**

@@ -6,23 +6,19 @@ import Block from "../Block.astro";
 const { block } = Astro.props;
 // console.log("Ol comp recieved content:")
 // console.log(block)
-
 ---
-<ol>
-    {
-        block.items.map((item) => (
-            <>
-            <li><RichText content= { item.listItems }></RichText></li>
-            {
-                item.children != false
-                ?
-                item.children.map((each) => (
-                    <Block block={each}></Block>
-                ))
-                :
-                null
-            }
-            </>
-        ))
-    }
+
+<ol class="list-decimal">
+  {
+    block.items.map((item) => (
+      <>
+        <li>
+          <RichText content={item.listItems} />
+        </li>
+        {item.children != false
+          ? item.children.map((each) => <Block block={each} />)
+          : null}
+      </>
+    ))
+  }
 </ol>

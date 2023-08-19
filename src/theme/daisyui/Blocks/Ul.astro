@@ -2,23 +2,19 @@
 import RichText from "./RichText.astro";
 import Block from "../Block.astro";
 const { block } = Astro.props;
-
 ---
-<ul>
-    {
-        block.items.map((item) => (
-            <>
-            <li><RichText content= { item.listItems }></RichText></li>
-            {
-                item.children != false
-                ?
-                item.children.map((each) => (
-                    <Block block={each}></Block>
-                ))
-                :
-                null
-            }
-            </>
-        ))
-    }
+
+<ul class="list-disc">
+  {
+    block.items.map((item) => (
+      <>
+        <li>
+          <RichText content={item.listItems} />
+        </li>
+        {item.children != false
+          ? item.children.map((each) => <Block block={each} />)
+          : null}
+      </>
+    ))
+  }
 </ul>

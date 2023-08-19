@@ -51,7 +51,7 @@ export async function get({ params }) {
     const body = {
         pageCover: pageCover,
         pageIcon: iconMaker(pageMetaData),
-        pageTitle: pageMetaData.properties.title.title[0].plain_text,
+        pageTitle: pageMetaData.properties.title.title.length === 0 ? 'untitled' : pageMetaData.properties.title.title[0].plain_text,
         createdDate: createdDate,
         createdTime: createdTime,
         pageContent: fullPageContents

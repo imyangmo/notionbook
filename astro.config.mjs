@@ -24,7 +24,7 @@ export default defineConfig({
   // output: "static",
   output: "server",
   adapter: vercel({
-    analytics: false,
+    analytics: true,
   }),
   headers: {
     'Cache-Control': 'private,max-age=60,immutable'

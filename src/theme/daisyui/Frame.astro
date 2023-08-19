@@ -76,12 +76,13 @@ const currentTitle = `${pageData.pageTitle} - ${siteMeta.siteTitle} | Powered by
               style={"background-image: url(" + pageData.pageCover + ")"}
             />
             <div class="mx-4 lg:mx-0">
+              {" "}
               <article class="prose prose-base mx-auto pt-4">
-                <h1>{pageData.pageTitle}</h1>
+                <h1 class="text-4xl my-12">{pageData.pageTitle}</h1>
                 {pageData.pageContent.map((block) => (
                   <Block block={block} />
                 ))}
-              </article>
+              </article>{" "}
               <div class="divider mt-10" />
               <div class="flex justify-between lg:mx-6">
                 {prev === null ? (
@@ -231,5 +232,9 @@ const currentTitle = `${pageData.pageTitle} - ${siteMeta.siteTitle} | Powered by
     background-position: center;
     background-size: cover;
     height: 10vh;
+  }
+
+  .article {
+    max-width: 768px;
   }
 </style>

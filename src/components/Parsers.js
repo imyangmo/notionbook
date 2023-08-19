@@ -5,6 +5,15 @@ import { v4 as uuidv4 } from 'uuid';
 import Downloader from "nodejs-file-downloader";
 import { getImage } from '@astrojs/image';
 
+function hasDomain(url) {
+    try {
+        const urlObj = new URL(url);
+        return urlObj.hostname !== '';
+    } catch (e) {
+        return false;
+    }
+}
+
 export const indexParser = (data) => {
     let content = [];
 
@@ -75,8 +84,8 @@ const richTextParser = (data) => {
     let text = {
         type: '',
         content: '',
-        color: '',
-        annotations: '',
+        color: [],
+        annotations: [],
         link: '',
         page_id: ''
     }
@@ -88,25 +97,42 @@ const richTextParser = (data) => {
             but simply put two text decoration styles together
             will be override by another, so this needs to be handle seperately.
             */
-            let anno = '';
+            // console.log(data)
+            let anno = [];
             if (data.annotations.strikethrough && data.annotations.underline) {
-                anno = anno + ' standul';
+                // anno = anno + ' standul';
+                anno.push('standul')
+                // Append rest of annotaitons
+                for (let [key, value] of Object.entries(data.annotations)) {
+                    if (key != 'color' && key !== 'strikethrough' && key !== 'underline' && value) {
+                        // Skip color annotation and others that does not applied
+                        // anno = anno + ' ' + key
+                        anno.push(key)
+                    }
+                }
             } else {
                 // Append rest of annotaitons
                 for (let [key, value] of Object.entries(data.annotations)) {
                     if (key != 'color' && value) {
                         // Skip color annotation and others that does not applied
-                        anno = anno + ' ' + key
+                        // anno = anno + ' ' + key
+                        anno.push(key)
                     }
                 }
             };
+
 
             text.content = data.plain_text;
             text.color = data.annotations.color;
             text.annotations = anno;
 
             if (data.href != null) {
-                text.link = data.href;
+                if (hasDomain(data.href)) {
+                    text.link = data.href;
+                } else {
+                    text.link = 'https://notion.so' + data.href;
+                }
+
             } else {
                 text.link = null;
             };

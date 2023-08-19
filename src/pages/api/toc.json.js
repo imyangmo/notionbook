@@ -29,6 +29,7 @@ export async function get({ params }) {
         let pageContentRawResults = []
         while (true) {
             const pageContentRaw = await pageBlockFetcher(pid, next_cursor);
+            // console.log(JSON.stringify(pageContentRaw))
             pageContentRawResults.push(...pageContentRaw.results)
             if (pageContentRaw.has_more) {
                 console.log("This page has more content, fetching...");
@@ -45,7 +46,7 @@ export async function get({ params }) {
         content.map(each => {
             if (each.type === 'child_page') {
                 body.push({
-                    'title': each.child_page.title,
+                    'title': each.child_page.title === '' ? 'untitled' : each.child_page.title,
                     'id': each.id,
                     'children': null
                 })
