@@ -1,12 +1,20 @@
 # Update Notes
 
+**2023.8.20**
+- FIX: fixed a Notion link that does not displayed properly issue
+- FIX: re-enabled Vercel Analytics
+- FIX: daisyui theme display issues
+
+---
+
 **2023.8.15**
 - Notionbook initial version.
 
 ---
 
-
 NotionBook is an variant of [Notionpaper](https://github.com/imyangmo/notionpaper_ssr), hence below changelogs are from Notionpaper.
+
+---
 
 **2023.8.1**
  - Notionpaper can change your content dynamically by using SSR now, you don't need to re-deploy to update your site after every change.

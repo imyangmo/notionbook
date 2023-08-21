@@ -216,10 +216,9 @@ Tutorials can be found on [here](https://npdocs.dreambulare.com/post/fd7a3ccb-35
 
 
 ## Update Notes
-**2023.8.20**
-- FIX: fixed a Notion link that does not displayed properly issue
-- FIX: re-enabled Vercel Analytics
-- FIX: daisyui theme display issues
+**2023.8.21**
+- ADD: netlify support
+- CHORE: some chores
 
 
 Notes histories see [here](./UpdateNotes.md).

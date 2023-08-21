@@ -9,6 +9,7 @@ import vercel from "@astrojs/vercel/serverless";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nb.dreambulare.com',
+  // integrations: [mdx(), sitemap()] 
   integrations: [mdx(), sitemap(), partytown({
     // Example: Disable debug mode.
     config: {
@@ -16,8 +17,8 @@ export default defineConfig({
     }
   })],
   output: "server",
-  adapter: node({
-    mode: 'standalone',
+  adapter: vercel({
+    analytics: true,
   }),
   headers: {
     'Cache-Control': 'private,max-age=60,immutable'

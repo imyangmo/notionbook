@@ -3,7 +3,6 @@ import { pageBlockFetcher } from "./Fetchers.js";
 import { v4 as uuidv4 } from 'uuid';
 
 import Downloader from "nodejs-file-downloader";
-import { getImage } from '@astrojs/image';
 
 function hasDomain(url) {
     try {
