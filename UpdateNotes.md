@@ -1,5 +1,11 @@
 # Update Notes
 
+**2023.8.21**
+- ADD: netlify support
+- CHORE: some chores
+
+---
+
 **2023.8.20**
 - FIX: fixed a Notion link that does not displayed properly issue
 - FIX: re-enabled Vercel Analytics

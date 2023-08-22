@@ -216,9 +216,11 @@ Tutorials can be found on [here](https://npdocs.dreambulare.com/post/fd7a3ccb-35
 
 
 ## Update Notes
-**2023.8.21**
-- ADD: netlify support
-- CHORE: some chores
+**2023.8.22**
+- ADD: Google Analytics 4 support
+- OPTI: SEO optimization
+- FIX: fixed vercel code display issue
+
 
 
 Notes histories see [here](./UpdateNotes.md).

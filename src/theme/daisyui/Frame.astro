@@ -2,6 +2,7 @@
 import Skeleton from "./Skeleton.astro";
 import Block from "./Block.astro";
 const { siteMeta, tocData, pageData, currentPID } = Astro.props;
+
 // console.log("fffffffffffffffffffffrom Frame");
 // console.log(siteMeta);
 // console.log(tocData);
@@ -32,7 +33,7 @@ function PrevAndNext(arr, id) {
 }
 const { previousObject: prev, nextObject: next } = PrevAndNext(
   tocData,
-  currentPID
+  currentPID,
 );
 
 // console.log(pageData);

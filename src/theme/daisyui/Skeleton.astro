@@ -1,11 +1,13 @@
 ---
 // skeleton supposed to define the framework of the page, which are the common shared parts
 // for example, the HTML context except the <body> part
-
+import { GoogleAnalytics } from "astro-google-analytics";
+import { SEO } from "astro-seo";
 import "./styles/customStyles.css";
 import "./styles/global.css";
 
 const { pageTitle, siteIcon } = Astro.props;
+const ga = import.meta.env.GOOGLE_ANALYTICS;
 ---
 
 <!DOCTYPE html>
@@ -16,25 +18,21 @@ const { pageTitle, siteIcon } = Astro.props;
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href={siteIcon} />
 
-    <!-- Primary Meta Tags -->
-    <title>{pageTitle}</title>
-    <!-- <title>{pageTitle}</title>
-        <meta name="title" content={pageTitle} />
-        <meta name="description" content={siteDesc} /> -->
-
-    <!-- Open Graph / Facebook -->
-    <!-- <meta property="og:type" content="website" />
-        <meta property="og:url" content={Astro.url} />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={siteDesc} /> -->
-    <!-- <meta property="og:image" content={new URL(image, Astro.url)} /> -->
-
-    <!-- Twitter -->
-    <!-- <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={Astro.url} />
-        <meta property="twitter:title" content={pageTitle} />
-        <meta property="twitter:description" content={siteDesc} /> -->
-    <!-- <meta property="twitter:image" content={new URL(image, Astro.url)} /> -->
+    <SEO
+      title={pageTitle}
+      description={pageTitle}
+      openGraph={{
+        basic: {
+          title: pageTitle,
+          type: "website",
+          image: "https://github.com/imyangmo/notionpaper/raw/main/logo.png",
+        }
+      }}
+    />
+    {
+      ga === '' ? <></> : <GoogleAnalytics id={ga} />
+    }
+    
   </head>
   <body>
     <slot />
