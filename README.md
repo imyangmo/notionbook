@@ -216,11 +216,7 @@ Tutorials can be found on [here](https://npdocs.dreambulare.com/post/fd7a3ccb-35
 
 
 ## Update Notes
-**2023.8.22**
-- ADD: Google Analytics 4 support
-- OPTI: SEO optimization
-- FIX: fixed vercel code display issue
-
-
+**2023.8.27**
+- OPTI: combined config file which now controlled by ENV
 
 Notes histories see [here](./UpdateNotes.md).

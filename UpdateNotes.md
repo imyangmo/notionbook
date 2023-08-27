@@ -1,5 +1,12 @@
 # Update Notes
 
+**2023.8.22**
+- ADD: Google Analytics 4 support
+- OPTI: SEO optimization
+- FIX: fixed vercel code display issue
+
+---
+
 **2023.8.21**
 - ADD: netlify support
 - CHORE: some chores
