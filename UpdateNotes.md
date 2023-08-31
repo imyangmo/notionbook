@@ -1,4 +1,8 @@
 # Update Notes
+**2023.8.27**
+- OPTI: combined config file which now controlled by ENV
+
+---
 
 **2023.8.22**
 - ADD: Google Analytics 4 support

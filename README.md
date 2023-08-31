@@ -216,7 +216,7 @@ Tutorials can be found on [here](https://npdocs.dreambulare.com/post/fd7a3ccb-35
 
 
 ## Update Notes
-**2023.8.27**
-- OPTI: combined config file which now controlled by ENV
+**2023.8.31**
+- CHORE: upgraded Astro to v3
 
 Notes histories see [here](./UpdateNotes.md).
